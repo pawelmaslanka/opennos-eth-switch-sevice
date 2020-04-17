@@ -1,0 +1,42 @@
+// Copyright (c) 2020 Pawel Maslanka
+// Contact: pawmas.pawelmaslanka@gmail.com
+// This file is subject to the terms and conditions defined in
+// file 'LICENSE.txt', which is part of this source code package.
+
+syntax = "proto3";
+option go_package = "opennos-eth-switch-service/mgmt";
+
+package opennos.eth.switch.mgmt;
+import public "interfaces/aggregate.proto";
+import public "interfaces/ethernet.proto";
+import public "platform/port.proto";
+import public "vlan/vlan.proto";
+
+message Result {
+    enum Status {
+        FAILED = 0;
+        SUCCESS = 1;
+    }
+
+    Status status = 1;
+}
+
+service EthSwitchMgmt {
+    rpc SetPortBreakout (platform.PortBreakoutRequest) returns (Result) {}
+    rpc SetPortBreakoutChanSpeed (platform.PortBreakoutChanSpeedRequest) returns (Result) {}
+
+    rpc CreateAggregateIntf (interfaces.CreateAggregateIntfRequest) returns (Result) {}
+    rpc DeleteAggregateIntf (interfaces.DeleteAggregateIntfRequest) returns (Result) {}
+    rpc AddEthernetIntfToAggregateIntf (interfaces.AddEthernetIntfToAggregateIntfRequest) returns (Result) {}
+    rpc RemoveEthernetIntfFromAggregateIntf (interfaces.RemoveEthernetIntfFromAggregateIntfRequest) returns (Result) {}
+
+    rpc AddIpv4AddrToEthernetIntf(interfaces.AddIpv4AddrToEthernetIntfRequest) returns (Result) {}
+    rpc RemoveIpv4AddrFromEthernetIntfRequest(interfaces.RemoveIpv4AddrFromEthernetIntfRequest) returns (Result) {}
+
+    rpc CreateVlan (vlan.CreateVlanRequest) returns (Result) {}
+    rpc DeleteVlan (vlan.DeleteVlanRequest) returns (Result) {}
+    rpc AddAggregateIntfToVlan (vlan.AddAggregateIntfToVlanRequest) returns (Result) {}
+    rpc RemoveAggregateIntfFromVlan (vlan.RemoveAggregateIntfFromVlanRequest) returns (Result) {}
+    rpc AddEthernetIntfToVlan (vlan.AddEthernetIntfToVlanRequest) returns (Result) {}
+    rpc RemoveEthernetIntfFromVlan (vlan.RemoveEthernetIntfFromVlanRequest) returns (Result) {}
+}

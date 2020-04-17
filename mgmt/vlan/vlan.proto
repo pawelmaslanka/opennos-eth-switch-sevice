@@ -1,0 +1,50 @@
+// Copyright (c) 2020 Pawel Maslanka
+// Contact: pawmas.pawelmaslanka@gmail.com
+// This file is subject to the terms and conditions defined in
+// file 'LICENSE.txt', which is part of this source code package.
+
+syntax = "proto3";
+option go_package = "opennos-eth-switch-service/mgmt/vlan";
+
+package vlan;
+import public "interfaces/aggregate.proto";
+import public "interfaces/ethernet.proto";
+
+message Vlan {
+    enum Mode {
+        ACCESS = 0;
+        NATIVE = 1;
+        TRUNK = 2;
+    }
+
+    uint32 vid = 1;
+    Mode mode = 2;
+}
+
+message CreateVlanRequest {
+    Vlan vlan = 1;
+}
+
+message DeleteVlanRequest {
+    Vlan vlan = 1;
+}
+
+message AddAggregateIntfToVlanRequest {
+    Vlan vlan = 1;
+    repeated interfaces.AggregateIntf aggIntfs = 2;
+}
+
+message RemoveAggregateIntfFromVlanRequest {
+    Vlan vlan = 1;
+    repeated interfaces.AggregateIntf aggIntfs = 2;
+}
+
+message AddEthernetIntfToVlanRequest {
+    Vlan vlan = 1;
+    repeated interfaces.EthernetIntf ethIntfs = 2;
+}
+
+message RemoveEthernetIntfFromVlanRequest {
+    Vlan vlan = 1;
+    repeated interfaces.EthernetIntf ethIntfs = 2;
+}

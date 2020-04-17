@@ -1,0 +1,14 @@
+// Copyright (c) 2020 Pawel Maslanka
+// Contact: pawmas.pawelmaslanka@gmail.com
+// This file is subject to the terms and conditions defined in
+// file 'LICENSE.txt', which is part of this source code package.
+
+syntax = "proto3";
+option go_package = "opennos-eth-switch-service/mgmt/interfaces";
+
+package interfaces;
+
+message Ipv4Addr {
+    string ip = 1;
+    uint32 prfxLen = 2;
+}

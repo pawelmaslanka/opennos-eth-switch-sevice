@@ -1,0 +1,32 @@
+// Copyright (c) 2020 Pawel Maslanka
+// Contact: pawmas.pawelmaslanka@gmail.com
+// This file is subject to the terms and conditions defined in
+// file 'LICENSE.txt', which is part of this source code package.
+
+syntax = "proto3";
+option go_package = "opennos-eth-switch-service/mgmt/interfaces";
+
+package interfaces;
+import public "interfaces/ethernet.proto";
+
+message AggregateIntf {
+    string ifname = 1; 
+}
+
+message CreateAggregateIntfRequest {
+    AggregateIntf aggIntf = 1; 
+}
+
+message DeleteAggregateIntfRequest {
+    AggregateIntf aggIntf = 1; 
+}
+
+message AddEthernetIntfToAggregateIntfRequest {
+    AggregateIntf aggIntf = 1;
+    repeated EthernetIntf ethIntfs = 2;
+}
+
+message RemoveEthernetIntfFromAggregateIntfRequest {
+    AggregateIntf aggIntf = 1;
+    repeated EthernetIntf ethIntfs = 2;
+}

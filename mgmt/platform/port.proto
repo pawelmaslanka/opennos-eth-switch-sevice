@@ -1,0 +1,46 @@
+// Copyright (c) 2020 Pawel Maslanka
+// Contact: pawmas.pawelmaslanka@gmail.com
+// This file is subject to the terms and conditions defined in
+// file 'LICENSE.txt', which is part of this source code package.
+
+syntax = "proto3";
+option go_package = "opennos-eth-switch-service/mgmt/platform";
+
+package platform;
+import public "interfaces/ethernet.proto";
+
+message PortSpeed {
+    enum Mode {
+        SPEED_10GB = 0;
+        SPEED_40GB = 1;
+        SPEED_100GB = 2;
+    }
+
+    Mode mode = 1;
+}
+
+message ChannelSpeed {
+    enum Mode {
+        SPEED_10GB = 0;
+        SPEED_100GB = 1;
+    }
+
+    Mode mode = 1;
+}
+
+message PortBreakoutRequest {
+    enum NumChannels {
+        MODE_1x = 0;
+        MODE_2x = 1;
+        MODE_4x = 2;
+    }
+
+    interfaces.EthernetIntf ethIntf = 1; 
+    NumChannels numChannels = 2;
+    ChannelSpeed channelSpeed = 3;
+}
+
+message PortBreakoutChanSpeedRequest {
+    interfaces.EthernetIntf ethIntf = 1; 
+    ChannelSpeed channelSpeed = 2;
+}

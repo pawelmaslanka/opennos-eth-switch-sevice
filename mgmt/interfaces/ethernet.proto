@@ -1,0 +1,24 @@
+// Copyright (c) 2020 Pawel Maslanka
+// Contact: pawmas.pawelmaslanka@gmail.com
+// This file is subject to the terms and conditions defined in
+// file 'LICENSE.txt', which is part of this source code package.
+
+syntax = "proto3";
+option go_package = "opennos-eth-switch-service/mgmt/interfaces";
+
+package interfaces;
+import public "interfaces/subinterface.proto";
+
+message EthernetIntf {
+    string ifname = 1; 
+}
+
+message AddIpv4AddrToEthernetIntfRequest {
+    EthernetIntf ethIntf = 1;
+    interfaces.Ipv4Addr addr = 2;
+}
+
+message RemoveIpv4AddrFromEthernetIntfRequest {
+    EthernetIntf ethIntf = 1;
+    interfaces.Ipv4Addr addr = 2;
+}
